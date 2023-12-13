@@ -2,14 +2,15 @@
 #include <time.h>
 int main(int argc, char *argv[])
 {
-  time_t now;
-  struct tm *clock;
+  time_t now; 
+  struct tm *clock; 
+  char time_string[64];
   int hours = 0;
 
-  time(&now);
+  time(&now); 
   clock = localtime(&now);
   hours = clock->tm_hour;
-    
+
   if(argc < 2)
     puts("Hello you sexy beast!");
     else if (hours < 12)
@@ -18,15 +19,11 @@ int main(int argc, char *argv[])
     printf("Afternoon");
     else
     printf("Evening");
-  if(argc > 1)
-   printf(", %s\n", argv[1]);
-    
 
+strftime(time_string, 64,"Today is %A, %B %d, %Y\n%I:%M%p", clock);
 
-time(&now);
-printf ("It's %s\n", ctime(&now));
-
-
-
-
+if(argc > 1){
+  printf(", %s", argv[1]);
+}
+  printf("\n%s", time_string);
 }
